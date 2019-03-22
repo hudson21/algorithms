@@ -306,3 +306,53 @@ function func() {
         func()
     }
 }
+
++++++++++++++A recursive function will continue to call itself  until the base case is satisfied+++++++++++++++++++++
+
+// Factorial (!)
+// 4! = 4 * 3 * 2 * 1 = 24;
+// 3! = 3 * 2 * 1;
+
+function factorial(num) {
+    if (num === 1) {
+        return num;
+    } else {
+        return num * factorial(num - 1);
+    }
+}
+
+factorial(4);
+
+function binarySearch(numArray, key) {
+    var middleIdx = Math.floor(numArray.length / 2);
+    var middleElem = numArray[middleIdx];
+
+    if (middleElem === key) return true;
+    else if (middleElem < key && numArray.length > 1) {
+        return binarySearch(numArray.splice(middleIdx, numArray.length), key);
+    }
+    else if (middleElem > key && numArray.length > 1) {
+        return binarySearch(numArray.splice(0, middleIdx), key);
+    }
+    else return false; 
+}
+
+binarySearch([5, 7, 12, 16, 36, 39, 42, 56, 71], 56);
+
+====================================== Fibonacci ================================================
+function fibonacci(position) {
+  if (position  < 3) return 1;
+  else return fibonacci(position - 1) + fibonacci(position - 2);
+}
+
+fibonacci(10);
+
+Hints:
+1. does not require a lot of code - don´t over-complicate it!
+2. base case deals with the fact that the first two numbers are always 1 and 1
+
+====================================== Memoized Fibonacci ================================================
+function fibMemo(index, cache) {
+    // index: index of number in fibonacci sequence
+    // cache: an array used as memory
+}
