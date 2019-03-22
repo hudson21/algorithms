@@ -1,0 +1,199 @@
+https://repl.it
+
+====================================== Fizz Buzz ================================================
+It will display orderly the a scale of numbers until the first one taken form the parameters
+
+Divisible by 3: Fizz
+Divisible by 5: Buzz
+Disible for 3 and 5: FizzBuzz
+
+Modulus Operator: %
+
+
+function fizzBuzz(num) {
+    for (let i = 1; i <= num; i++) {
+        if(i % 15 === 0) console.log("Fizz Buzz");
+        else if (i % 3 === 0)  console.log("Fizz");
+        else if (i % 5 === 0)  console.log("Buzz");
+        else console.log(i);
+    }
+}
+
+fizzBuzz(20);
+
+====================================== Harmless Ransom Note ================================================
+function harmlessRansomNote(noteText, magazineText) {
+
+}
+
+Linear Time Complexity
+O(n)+ O(m)
+O(n + m)
+
+Note: 'This is a note for you from  a secret admirer'
+
+Magazine: 'puerto rico is a great place you must hike far from
+town to find a secret waterfall that i am an admirer of but note
+that it is not as hard as it seems this is my advice for you'
+
+Big O Notation: it is a notation used to classify how scalable an algorithm or function is.
+
+++++++++++"How much slower an algorithm will run if its input sites grows"++++++++++++
+
+function harmlessRansomNote (noteText, magazineText) {
+    var noteArr = noteText.split(' ');
+    var magazineArr = magazineText.split(' ');
+    var magazineObj = {};
+
+    magazineArr.forEach(word => {
+        if (!magazineObj[word]) magazineObj[word] = 0;
+        magazineObj[word]++;
+    });
+
+    var noteIsPossible= true;
+    noteArr.forEach(word=> {
+        if (magazineObj[word]) {
+            magazineObj[word]--;
+            if (magazineObj[word] < 0) noteIsPossible = false;
+        }
+        else noteIsPossible = false;
+    });
+
+    return noteIsPossible;
+}
+
+harmlessRansomNote('this is a secret note for you from a secret admirer', 
+'puerto rico is a place of great wonder and excitement it has many secret
+ waterfall locatoins that i am an admirer of you must hike quite a distance 
+ to find the secret places as they are far from populated areas but it is 
+ worth the effort a tip i have for you is to go early in the morning when it 
+ is not so hot out also note that you must wear hiking boots this is one of 
+ the best places i have ever visited');
+
+====================================== Is Palindrome ================================================
+It is any word that is spelled the same backward and forward
+ex: - racecar
+    - Madam, I'm Adam
+
+function isPalindrome(string) {
+    string = string.toLowerCase();
+    var characterArr = string.split('');
+    var validCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+    var letterArr = [];
+    characterArr.forEach(char => {
+        if (validCharacters.indexOf(char) > -1) letterArr.push(char); 
+    });
+
+    if (letterArr.join('') === letterArr.reverse().join('')) return true;
+    else return false;
+}
+
+console.log(isPalindrome("Madam I'm Adam"));
+
+====================================== Caesar Cipher ================================================
+function caesarCipher (str, num) {
+    //26: the length of the alphabet
+    num = num % 26;//Result between 0 and 25 or -25 and 0
+    var lowerCaseString = str.toLowerCase();
+    var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    var newString = '';
+
+    for (var i = 0; i < lowerCaseString.length; i++) {
+        var currentLetter = lowerCaseString[i];
+        if (currentLetter === ' ') {
+            newString += currentLetter;
+            continue; //It goes to the next iteration
+        }
+        var currentIndex= alphabet.indexOf(currentLetter);
+        var newIndex= currentIndex + num;
+        if (newIndex > 25) newIndex = newIndex - 26;
+        if (newIndex < 0) newIndex = 26 + newIndex;
+        if (str[i] === str[i].toUpperCase()) {
+            newString += alphabet[newIndex].toUpperCase();
+        }
+        else newString += alphabet[newIndex];
+    }
+
+    return newString;
+}
+
+caesarCipher('Zoo Keeper', 2); //Bqq Mggrgt
+caesarCipher('Big Car', -16); //LsqMkb
+caesarCipher('Javascript', -900); //Tkfkcmbszd
+
+====================================== Reverse Words ================================================
+function reverseWords(string) {
+    //reverse every word in the string
+    stringArr = string.split(' ');
+    
+    splitedString = [];
+    stringArr.forEach(word => {
+        splitedString.push(word);
+    });
+    console.log("splitedString", splitedString);
+
+    //return the new string
+}
+
+Example 'this is a string of words'
+Result 'sith si a gnirts fo sdrow'
+
+Dont use the reverse method
+
+/////////////////////////////(My Approach)/////////////////////////////////////////////////
+function reverseWords(string) {
+    //reverse every word in the string
+    stringArr = string.split(' ');
+    splitedString = [];
+
+    stringArr.forEach(word => {
+      splitedWord = word.split('');
+      reversedWord = '';
+      for (var i = splitedWord.length -1; i >= 0; i--) {
+        reversedWord += splitedWord[i]
+      }
+      splitedString.push(reversedWord);
+    });
+    
+    //return the new string
+    return splitedString.join(' ');
+}
+
+console.log(reverseWords('this is a string of words'));
+
+/////////////////////////////////(Course Approach)/////////////////////////////////////
+function reverseWords(string) {
+    var wordsArr = string.split(' ');
+    var reverseWordsArr = [];
+
+    wordsArr.forEach(word => {
+        var reversedWord = '';
+        for (var i = word.length - 1; i >= 0; i--) {
+            reversedWord += word[i];
+        }
+        reverseWordsArr.push(reversedWord);
+    });
+
+    return reverseWordsArr.join(' ');
+
+}
+
+====================================== Reverse Array In Place ================================================
+function reverseArrayInPlace(arr) {
+    for (var i = 0; i < arr.length / 2; i++) {
+        var tempVar = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = tempVar;
+    }
+
+    return arr;
+}
+
+reverseArrayInPlace(['a','b','c','d','e']);
+
+* Be sure to manipulate the array passed in
+* Do not push elements into a new array and return that array 
+* Do not use array.reverse() method
+
+====================================== Mean Median Mode ================================================
