@@ -3,3 +3,4 @@
 2. Pair programming at a computer
 3. Whiteboarding
 
+npm install -g jest
