@@ -1,0 +1,5 @@
+==================== Evaluating Coding Ability ============================
+1. Take-home assignment
+2. Pair programming at a computer
+3. Whiteboarding
+
