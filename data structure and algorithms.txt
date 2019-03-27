@@ -4,3 +4,7 @@
 3. Whiteboarding
 
 npm install -g jest
+
+jest fib/test.js --watch
+
+==================== Reverse String ============================
