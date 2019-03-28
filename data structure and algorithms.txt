@@ -8,3 +8,28 @@ npm install -g jest
 jest fib/test.js --watch
 
 ==================== Reverse String ============================
+node inspect index.js
+
+==================== Palindrome ============================
+Array Helper: Array.prototype.every();
+
+function isBelowThreshold(currentValue) {
+  return currentValue < 40;
+}
+
+var array1 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold));
+// expected output: true
+
+==================== Integer Reversal ============================
+Math.sign()
+
+Math.sign(3);     //  1
+Math.sign(-3);    // -1
+Math.sign('-3');  // -1
+Math.sign(0);     //  0
+Math.sign(-0);    // -0
+Math.sign(NaN);   // NaN
+Math.sign('foo'); // NaN
+Math.sign();      // NaN
