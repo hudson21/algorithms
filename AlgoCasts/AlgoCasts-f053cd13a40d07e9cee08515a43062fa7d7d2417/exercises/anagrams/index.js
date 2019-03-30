@@ -9,30 +9,11 @@
 //   anagrams('Hi there', 'Bye there') --> False
 
 function anagrams(stringA, stringB) {
-    word1Hash = buildCharMap(stringA);
-    word2Hash = buildCharMap(stringB);
-
-    //If both objects don have the same same it must be returned false
-    if (Object.keys(word1Hash).length !== Object.keys(word2Hash).length) {
-        return false
-    } 
-    
-    for (let word in word1Hash) {
-        if (word1Hash[word] !== word2Hash[word]) return false;
-    }
-    
-    return true;
+  return cleanString(stringA) === cleanString(stringB);
 }
 
-function buildCharMap(str) {
-    str = str.replace(/[^\w]/g, "").toLowerCase();
-    const strHash = {};
-
-    for (let word of str ) {
-        if(!strHas[word]) strHas[word] = 0;
-        strHas[word]++;
-    }
-    return strHash;
+function cleanString(str) {
+  return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
 }
 
 module.exports = anagrams;

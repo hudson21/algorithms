@@ -52,3 +52,25 @@ RegExp: Regular Expressions
 
 const word = "HI THERE !!!!!";
 word.replace(/[^\w]/g, "") //Replace the spaces no spaces
+
+==================== Sentence Capitalization ============================
+https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/String/slice
+
+str.slice(beginIndex[, endIndex])
+
+El siguiente ejemplo usa slice() para crear una nueva cadena.
+
+var cadena1 = "La mañana se nos echa encima.";
+var cadena2 = cadena1.slice(3, -2);
+console.log(cadena2);
+Esto escribe:
+
+mañana se nos echa encim
+
+==================== Printing Steps ============================
+
+
+
+
+
+
