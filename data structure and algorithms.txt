@@ -33,3 +33,22 @@ Math.sign(-0);    // -0
 Math.sign(NaN);   // NaN
 Math.sign('foo'); // NaN
 Math.sign();      // NaN
+
+convert a string to a number parseInt('string number')
+
+==================== Max Chars ============================
+
+for of : It is used FOR iterating  an array or string, or array of objects;
+for in: specifically for objects
+
+==================== The classic Fizz Buzz ============================
+
+==================== Array Chunking ============================
+slice method 
+
+==================== Anagrams ============================
+https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/RegExp
+RegExp: Regular Expressions
+
+const word = "HI THERE !!!!!";
+word.replace(/[^\w]/g, "") //Replace the spaces no spaces
