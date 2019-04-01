@@ -85,6 +85,63 @@ function vowels(str) {
 Try to do it by yourself again
 
 ==================== Runtime Complexity ============================
+Describes the performance of an algorithm
+How much more processing power/time is required to run your algorithm if we double the inputs?
+
+LINEAR RUNTIME: There is a direct one to one relationship between the number of input elements and the amount of work that 
+it needs to be processed 
+
+An example of linear runtime could be the Reverse algorithm
+
+N TIMES COMPLEXITY OR CUADRATIC COMPLEXITY: The Steps algorithm is an example of this type of runtime 
+
+
+Runtime Types:
+
+
+Constant Time  1 : No matter how many elements we are working with, the algorithm/operation/whatever will always
+                   take the same amount of time;
+
+Logaritmic Time log(n) : You have this is doubling the number of elements you are iterating over does not double the amount
+                         of work . Always assume that searching operations are log(n)
+
+Linear Time n : Iterating throughall elements in a collection of data.  If you see a for loop spanning from '0' to 'array.length',
+                you probably have 'n', or linear runtime.
+
+Quasilinear Time n * log(n) : You have this if doubling the number of elements you are iterating over does not double the amount 
+                              of work. Always assume that any sorting operation is n*log(n)
+
+Quadratic Time n ^ 2 : Every element in a collection has to be compared to every other element. 'The handshake problem'
+
+Exponential Time 2 ^ n : If you add a "single" element to a collection, the processing power required doubles
 
 
 
+-------------------------------------------------
+Big 'O' Notation:
+  O(n) --> Linear
+  O(1) --> Constant
+  O(n^2) --> Quadratic
+
+
+Identifying Runtime Complexity
+
+1. Probably O(n) : Iterating with a simple for loop through a single collection?
+
+2. Still O(n). There are no constants in runtime: Iterating through half a collection
+
+3. O(n + m): Iterating through two different collections with separate for loops
+
+4. O(n^2) : Two nested for loops iterating over the same collection
+
+5. O(n*m) : Two nested for loops iterating over different collections
+
+6. O(n*log(n)): Sorting
+
+7. O(log(n)): Searching a sorted Array.
+
+
+
+
+
+SPACE COMPLEXITY: How much more memory is required by doubling the problem set?
