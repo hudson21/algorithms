@@ -70,7 +70,21 @@ mañana se nos echa encim
 ==================== Printing Steps ============================
 
 
+==================== Find the vowels ============================
+word.includes("o");
 
+function vowels(str) {
+   // g: dont stop in the first match
+   // i: insensitive cases lowerCase and upperCase
+   const matches = str.match(/[aeiou]/gi);
+   return matches ? matches.length : 0;
+}
+
+==================== Enter the Matrix Spiral ============================
+
+Try to do it by yourself again
+
+==================== Runtime Complexity ============================
 
 
 
