@@ -190,4 +190,35 @@ Data Structure: Ways of organizing information with optimal runtime complexity f
 Javascript natively implements several data structures. You will still be asked about inferior data structures
 
 ==================== The Queue Data Structure ============================
+FIFO in Queues (First In First Out)
+      Queue                  Array Equivalent
+Add to the queue                array.unshift();
+Remove from the queue           array.pop();
+
+
+-----------------------------------------------------------------
+    To...                         Run this
+Create a new empty queue      const q = new Queue();
+
+Add a record to a queue           q.add(1);
+
+Remove record at the end          q.remove(); 
+of a queue
+
+
+==================== Underwater Queue Weaving ============================
+
+
+
+
+==================== Stack Em Up With Stacs ==============================
+FILO (First In Last Out)
+
+Push: Add a record to the stack
+Pop: Remove the "top" record in the stack
+Peek: Return the "top" record without popping it
+
+
+==================== Two Become One ==============================
+
 
