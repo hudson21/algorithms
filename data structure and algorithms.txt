@@ -227,3 +227,5 @@ Queue from Stack
 ==================== Linked List =================================
 
 Node Implementation----------------
+
+In the LinkedList, the head is gonna have reference to the first node of the LinkedList  
