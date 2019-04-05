@@ -16,6 +16,7 @@ class LinkedList {
 
     insertFirst(data) {
         this.head = new Node(data, this.head);
+        // or this.insertAt(data, 0); To reuse the methods in an interview
     }
 
     size() {
@@ -32,6 +33,7 @@ class LinkedList {
 
     getFirst() {
         return this.head;
+        // or return this.getAt(0);
     }
 
     getLast() {
@@ -44,6 +46,8 @@ class LinkedList {
         }
 
         return node;
+
+        // or this.getAt(this.size() - 1);
     }
 
     clear() {
@@ -54,6 +58,94 @@ class LinkedList {
         if (!this.head) return;
         this.head = this.head.next;
     }
+
+    removeLast() {
+        if (!this.head) return;
+        if (!this.head.next) {
+            this.head = null;
+            return;
+        }
+
+        let previous = this.head;
+        let node = this.head.next;
+
+        while(node.next) {
+            previous = node;
+            node = node.next;
+        }
+        previous.next = null;
+    }
+
+    insertLast(data) {
+        const last = this.getLast();
+
+        if (last) {
+            // There are some existing nodes in our chain
+            last.next = new Node(data);
+        } else {
+            // The chain is empty
+            this.head = new Node(data);
+        }
+    }
+
+    getAt(position) {
+        let counter = 0;
+        let node = this.head; // if this.head = null, the while loop wont execute and it will be returned null
+
+        while (node) {
+            if (counter === position) return node; 
+            counter++;
+            node = node.next;
+        }
+
+        return null;
+    }
+
+    removeAt(index) {
+        if (!this.head) return;
+        if (index === 0) {
+            this.head = this.head.next;
+            return;
+        }
+
+        const previous = this.getAt(index - 1);
+        if (!previous || !previous.next) return;  // This will handle an index that is out of the bounds 
+        previous.next = previous.next.next;
+    }
+
+    insertAt(data, index) {
+        if (!this.head) {
+            this.head = new Node(data); 
+            return;
+        }
+        if (index === 0) {
+            this.head = new Node(data, this.head);
+            return;
+        }
+
+        const previous = this.getAt(index - 1) || this.getLast();
+        const node = new Node(data, previous.next);
+        previous.next = node;  
+    }
+
+    forEach(fn) {
+        let node = this.head;
+        let counter = 0;
+        while (node) {
+            fn(node, counter);
+            node = node.next;
+            counter++;
+        }
+    }
+
+    //This defines a generator function
+    *[Symbol.iterator]() {
+        let node = this.head;
+        while (node) {
+            yield node;
+            node = node.next;
+        }   
+    }   
 }
 
 
