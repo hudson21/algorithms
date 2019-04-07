@@ -231,3 +231,68 @@ Node Implementation----------------
 In the LinkedList, the head is gonna have reference to the first node of the LinkedList  
 
 ==================== Find the Midpoint =================================
+
+function midpoint(list) {
+    let slow = list.getFirst(); // list.head;
+    let fast = list.getFirst();
+
+    while (fast.next && fast.next.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    return slow;
+}
+
+==================== Circular List =================================
+
+function circular(list) {
+    let slow = list.getFirst();// list.head
+    let fast = list.getFirst();
+
+    while (fast.next && fast.next.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        
+        if (slow === fast) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+==================== From Last Question =================================
+
+function fromLast(list, n) {
+    let slow = list.getFirst();
+    let fast = list.getFirst();
+
+    while (n > 0) {
+        fast = fast.next;
+        n--;
+    }
+
+    while (fast.next) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+
+    return slow;
+}
+
+==================== Trees Overview =================================
+
+                20
+
+        0       40      -15
+
+    12  -2  1           -2
+
+
+Ways of interating into a tree
++ Breadth-First-Traversal: The tree is gonna be iterated from left to right per each level without mattering if the
+                           elements are not siblings
+    Ex. 20, 0, 40, -15, 12, -2, 1, -2
+
++ Depth-First-Traversal: 20, 0, 12, -2, 1, 40, -15, 2
