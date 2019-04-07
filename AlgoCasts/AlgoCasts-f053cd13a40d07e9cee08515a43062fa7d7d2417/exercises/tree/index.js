@@ -28,6 +28,35 @@ class Node {
 }
     
 class Tree {
+    constructor() {
+        this.root = null;
+    }
+
+    //Breadth First Traversal
+    traverseBF(fn) {
+        const arr = [this.root]; //This will give us the root element of our Tree
+
+        while(arr.length) {
+            const node = arr.shift(); //This shift method takes out the first position of the array
+            
+            arr.push(...node.children); //We want to add all the children from the node
+            
+            fn(node);
+        }
+    }
+
+    traverseDF(fn) {
+        const arr = [this.root];
+
+        while(arr.length) {
+            const node = arr.shift();
+
+            arr.unshift(...node.children);
+
+            fn(node);
+        }
+    }
+
     
 }
 

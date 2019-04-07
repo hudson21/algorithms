@@ -295,4 +295,65 @@ Ways of interating into a tree
                            elements are not siblings
     Ex. 20, 0, 40, -15, 12, -2, 1, -2
 
+
+    traverseBF(fn) {
+        const arr = [this.root]; //This will give us the root element of our Tree
+
+        while(arr.length) {
+            const node = arr.shift(); //This shift method takes out the first position of the array
+            
+            arr.push(...node.children); //We want to add all the children from the node
+            
+            fn(node);
+        }
+    }
+
+
 + Depth-First-Traversal: 20, 0, 12, -2, 1, 40, -15, 2
+
+traverseDF(fn) {
+        const arr = [this.root];
+
+        while(arr.length) {
+            const node = arr.shift();
+
+            arr.unshift(...node.children);
+
+            fn(node);
+        }
+}
+
+==================== Trees with Level Width =================================
+width === 'Implement Breadth First Traversal'
+
+function levelWidth(root) {
+    const arr = [root, 's']; // 's' is the flag to know if we are located at the final of a tree level or not 
+    const counters = [0];
+
+    //if arr.length is more than 1 it means there is more values apart from the stopper flag 's'
+    while (arr.length > 1) {    
+        const node = arr.shift();//Takes out the first element of the array
+
+        if (node === 's') {
+            counters.push(0);
+            arr.push('s'); //To add again the 's' flag for the next tree level
+        } else {
+            arr.push(...node.children);
+            counters[counters.length - 1]++;
+        }
+    }
+
+    return counters;
+}
+
+
+==================== My Best Friend Binary Search Tree =================================
+
++ Every node will have at least two children
++ The left node is always gonna be less than the parent one  (value > left.value)
++ The right node is always gonna be more than the parent one (value < right.value)
+
+Binary Tree dont fill the requirement of the right and left nodes as Binary Search Tree.
+The only requirement is to have at least to nodes per parent as mentioned above.
+
+
