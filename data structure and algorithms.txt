@@ -459,4 +459,470 @@ SelectionSort                   n^2                           easier
 MergeSort                       n*log(n)                      medium
 
 
+==================== Angular Unit Testing with Components =================================
+Test Driven Development (TDD)
 
+Jasmine Supports Behavior Driven Development (BDD)
+
+with Plunker:
+
+describe('Hello World', () => {
+
+    //Before Each of the tests are gonna be executed
+    beforeEach(() => {
+        expected = "Hello World";
+    }); 
+
+    afterEach(() => {
+        expected = "";
+    });
+
+    it('says Hello', () => {
+        expect(helloWorld())
+            .toEqual(expected);
+    });
+})
+
+beforeAll
+afterAll
+beforeEach
+afterEach
+
+
+
++++++++++++++++++++++++++++++++> EP 13.3 - Angular / Unit Testing / Classes & Pipes <++++++++++++++++++++++++++++++++++++++++
+
++++++++++> This is the angular service class
+export class AuthService {
+    isAuthenticated(): boolean {
+        return !!localStorage.getItem('token');
+    }
+}
+
++++++++++> This is the authService test component
+import {AuthService} from './auth.service';
+
+describe('Service Auth', () => {
+    let service: AuthService;
+
+    beforeEach(() => {
+        service = new AuthService();
+    });
+
+    afterEach(() => {
+        service =  null;
+        localStorage.removeItem('token');
+    });
+
+    it('should return true from isAuthenticated when there is a token', () => {
+        localStorage.setItem('token', '1234');
+        expect(service.isAuthenticated()).toBeTruthy();
+    });
+
+    it('should return false from isAuthenticated when there is no token', () => {
+        expect(service.isAuthenticated()).toBeFalsy();
+    });
+})
+
+
+
++++++++++> This is the angular pipe class
+
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+    name: 'default'
+})
+
+export class DefaultPipe implements PipeTransform {
+
+    transform(value: string, fallback: string, forceHttps: boolean) {
+        let image = "";
+        if (value) {
+            image = value;
+        } else {
+            image = fallback;
+        }
+        if (forceHttps) {
+            if (image.indexOf("https") == -1) {
+                image = image.replace("http", "https");
+            }
+        }
+        return image;
+    }
+
+}
+
++++++++++> This is the angular test pipe component
+import {DefaultPipe} from './default.pipe';
+
+descripe('Pipe: Default', () => {
+    let pipe : DefaultPipe;
+
+    beforeEach(() => {
+        pipe = new DefaultPipe();
+    });
+
+    if('providing no value returns fallback', () => {
+        expect(pipe.transform('', 'http://place-hold.it/300'))
+            .toBe('http://place-hold.it/300')
+    });
+});
+
+We can test any isolated class with simple jasmine spec file.
+
+
++++++++++++++++++++++++++++++++> EP 13.4 - Angular / Unit Testing / Mocks & Spies <++++++++++++++++++++++++++++++++++++++++
+
++++++++++> This is the angular login component
+
+import {Component} from '@angular/core';
+import {AuthService} from './auth.service';
+
+@Component({
+    selector: 'app-login',
+    template: `<a [hidden]="needsLogin()"> Login </a>`
+})
+
+export class LoginComponent {
+    constructor(private auth: AuthService) {
+    }
+
+    needsLogin() {
+        return !this.auth.isAuthenticated;
+    }
+}
+
++++++++++> This is the angular service class
+export class AuthService {
+    isAuthenticated(): boolean {
+        return !!localStorage.getItem('token');
+    }
+}
+
++++++++++> This is the angular login test component
+
+import {LoginComponent} from './login.component';
+import {AuthService} from './auth.service';
+
+
+describe('Component: LOgin', () => {
+    let component: LoginComponent;
+    let service: AuthService;
+
+    beforeEach(() => {
+        service = new AuthService();
+        component = new LoginComponent(service);
+    });
+
+    afterEach(() => {
+        service = null;
+        component = null;
+    });
+
+    it('needsLogin returns false when the user is not authenticated', () => {
+        spyOn(service, 'isAuthenticated').and.returnValue(false);
+        expect(component.needsLogin()).toBeTruthy();
+        expect(service.isAuthenticated).toHaveBeenCalled();
+    });
+
+    it('needsLogin returns false when the user is not authenticated', () => {
+        spyOn(service, 'isAuthenticated').and.returnValue(true);
+        expect(component.needsLogin()).toBeFalsy();
+        expect(service.isAuthenticated).toHaveBeenCalled();
+    });
+});
+
+
++++++++++++++++++++++++++++++++> EP 13.5 - Angular / Unit Testing / Angular Test Bed <++++++++++++++++++++++++++++++++++++++++
+
++ What is Angular Test Bed (ATB) and how to use it.
++ When to use ATB vs. plain vanilla Jasmine tests.
+
+
++++++++++> This is the angular login test bed component
+
+import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {AuthService} from './auth.service';
+
+describe('Component: Login', () => {
+
+    let component: LoginComponent
+    let fixture: ComponentFixture<LoginComponent>;
+    let authService: AuthService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoginComponent],
+            providers: [AuthService]
+        });   
+    })
+
+    fixture = TestBed.createComponent(LoginComponent);
+
+    component = fixture.componentInstance;
+
+    authService = TestBed.get(AuthService);
+
+    it('needsLogin returns false when the user is not authenticated', () => {
+        spyOn(service, 'isAuthenticated').and.returnValue(false);
+        expect(component.needsLogin()).toBeTruthy();
+        expect(service.isAuthenticated).toHaveBeenCalled();
+    });
+
+    it('needsLogin returns false when the user is not authenticated', () => {
+        spyOn(service, 'isAuthenticated').and.returnValue(true);
+        expect(component.needsLogin()).toBeFalsy();
+        expect(service.isAuthenticated).toHaveBeenCalled();
+    });
+
+});
+
+++++++++++++++++++++++++ When to use ATB ++++++++++++++++++++++++++
++ Test the interaction of a directive or component with it's template.
++ Test change detection.
++ Test and use Angular DI(Dependency Injection) framework
++ Test the NgModule configuration we use in our application
++ The ATB lets us test parts of our Angular application as it will beinf run in the context of a real running Angular application
+
++++++++++++++++++++++++++++++++> EP 13.6 - Angular / Unit Testing / Change Detection <++++++++++++++++++++++++++++++++++++++++  
+
+
++++++++++> This is the angular login component
+
+import {Component} from '@angular/core';
+import {AuthService} from './auth.service';
+
+@Component({
+    selector: 'app-login',
+    template: `
+    <a>
+      <span *ngIf="needsLogin()">Login</span>
+      <span *ngIf="!needsLogin()">Logout</span> 
+    </a>`
+})
+
+export class LoginComponent {
+    constructor(private auth: AuthService) {
+    }
+
+    needsLogin() {
+        return !this.auth.isAuthenticated;
+    }
+}
+
+
++++++++++> This is the angular login test bed component
+
+import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {AuthService} from './auth.service';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+describe('Component: Login', () => {
+
+    let component: LoginComponent
+    let fixture: ComponentFixture<LoginComponent>;
+    let authService: AuthService;
+    let el: DebugElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoginComponent],
+            providers: [AuthService]
+        });   
+    })
+
+    fixture = TestBed.createComponent(LoginComponent);
+
+    component = fixture.componentInstance;
+
+    authService = TestBed.get(AuthService);
+
+    el = fixture.debugElement.query(By.css('a'));
+
+    it('login button hidden when the user is authenticated', () => {
+        expect(el.nativeElement.textContent.trim()).toBe('');
+        fixture.detectChanges();
+        expect(el.nativeElement.textContent.trim()).toBe('Login');
+        spyOn(authService 'isAuthenticated').and.returnValue(true);
+        expect(el.nativeElement.textContent.trim()).toBe('Login');
+        fixture.detectChanges();
+        expect(el.nativeElement.textContent.trim()).toBe('Logout');
+    });
+
+});
+
+
++ By using the ATB and fixtures we can inspect the components view through fixture.debugElement and 
+  also trigger a change detection run by calling fixture.detectChanges();
+
+
++++++++++++++++++++++++++++++++> EP 13.7 - Angular / Unit Testing / Asynchronous Code <++++++++++++++++++++++++++++++++++++++++ 
+
++++++++++> This is the angular service class
+export class AuthService {
+    isAuthenticated(): Promise<boolean> {
+        return Promise.resolve(!!localStorage.getItem('token'));
+    }
+}
+
++++++++++> This is the angular login component
+
+import {Component} from '@angular/core';
+import {AuthService} from './auth.service';
+
+@Component({
+    selector: 'app-login',
+    template: `
+    <a>
+      <span *ngIf="needsLogin()">Login</span>
+      <span *ngIf="!needsLogin()">Logout</span> 
+    </a>`
+})
+
+export class LoginComponent implements OnInit {
+
+    needsLogin: boolean = true;
+
+    constructor(private auth: AuthService) {
+    }
+
+    ngOnInit() {
+        this.auth.isAuthenticated().then((authenticated) => {
+            this.needsLogin = !authenticated;
+        })
+    }
+
+    needsLogin() {
+        return !this.auth.isAuthenticated;
+    }
+}
+
+
++++++++++> This is the angular login test bed component
+
+import {TestBed, ComponentFixture, async, whenStatble, fakeAsync, tick} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {AuthService} from './auth.service';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+describe('Component: Login', () => {
+
+    let component: LoginComponent
+    let fixture: ComponentFixture<LoginComponent>;
+    let authService: AuthService;
+    let el: DebugElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoginComponent],
+            providers: [AuthService]
+        });   
+    })
+
+    fixture = TestBed.createComponent(LoginComponent);
+
+    component = fixture.componentInstance;
+
+    authService = TestBed.get(AuthService);
+
+    el = fixture.debugElement.query(By.css('a'));
+
+    /*
+        it('Button label', (done) => {
+            fixture.detectChanges();
+            expect(el.nativeElement.textContent.trim()).toBe('Login');
+            let spy = spyOn(authService 'isAuthenticated').and.returnValue(Promise.resolve(true));
+            component.ngOnInit();
+
+            spy.calls.mostRecent().returnValue.then(() => {
+                fixture.detectChanges();
+                expect(el.nativeElement.textContent.trim()).toBe('Logout');
+                done();
+            });
+        }); 
+    */
+
+    /*
+        it('Button label', async(() => {
+            fixture.detectChanges();
+            expect(el.nativeElement.textContent.trim()).toBe('Login');
+            let spy = spyOn(authService 'isAuthenticated').and.returnValue(Promise.resolve(true));
+            component.ngOnInit();
+
+            spy.whenStatble().then(() => {
+                fixture.detectChanges();
+                expect(el.nativeElement.textContent.trim()).toBe('Logout');
+            });
+        })); 
+    */
+
+        it('Button label', fakeAsync(() => {
+            fixture.detectChanges();
+            expect(el.nativeElement.textContent.trim()).toBe('Login');
+            let spy = spyOn(authService 'isAuthenticated').and.returnValue(Promise.resolve(true));
+            component.ngOnInit();
+
+            tick(); // blocks execution simulates the passage of time until all pending asynchronous activities get completed
+            //Blocks and wait for all the promises to be result
+
+            
+            fixture.detectChanges();
+            expect(el.nativeElement.textContent.trim()).toBe('Logout');
+            
+        })); 
+
+});
+
+
+
++++++++++++++++++++++++++++++++> EP 13.8 - Angular / Unit Testing / Dependency Injection <++++++++++++++++++++++++++++++++++++++++ 
+
++++++++++> This is the angular login test bed component
+
+import {TestBed, ComponentFixture inject} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {AuthService} from './auth.service';
+
+class MockAuthService extends AuthService {
+    isAuthenticated() {
+        return 'Mocked';
+    }
+}
+
+describe('Component: Login', () => {
+
+    let component: LoginComponent
+    let fixture: ComponentFixture<LoginComponent>;
+    let authService: AuthService;
+    let componentService: AuthService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoginComponent],
+            providers: [AuthService]
+        });   
+
+        TestBed.overrideComponent(
+            LoginComponent,
+            {set: {providers: [{provide: AuthService, useClass: MockAuthService}]}}
+        );
+    
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+
+        testBedService = TestBed.get(AuthService);
+        componentService = fixture.debugElement.injector.get(AuthService);
+
+    })
+
+    it('Service injected via inject(...) and TestBed.get(...) should be the same instance', 
+        inject([AuthService], (injectService: AuthService) => {
+            expect(injectService)toBe(testBedService);
+        });
+    );
+});
