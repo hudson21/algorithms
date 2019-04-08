@@ -357,3 +357,106 @@ Binary Tree dont fill the requirement of the right and left nodes as Binary Sear
 The only requirement is to have at least to nodes per parent as mentioned above.
 
 
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+
+    insert(data) {
+        if (data < this.data && this.left) {
+            this.left.insert(data);
+        } else if (data < this.data) {
+            this.left = new Node(data);
+        } else if (data > this.data && this.right) {
+            this.right.insert(data);
+        } else if (data > this.data) {
+            this.right = new Node(data);
+        }
+    }
+
+    contains(data) {
+        if (this.data === data) {
+            return this;
+        }
+
+        if (this.data < data && this.right) {
+            return this.right.contains(data);
+        } else if (this.data > data && this.left) {
+            return this.left.contains(data); 
+        } 
+
+        return null;
+    }
+
+
+}
+
+
+==================== Validating a Binary Search Tree =================================
+
+function validate(node, min = null, max = null) {
+    if (max !== null && node.data > max) {
+        return false;
+    }
+
+    if (min !== null && node.data < min) {
+        return false;
+    }
+
+    if (node.left && !validate(node.left, min, node.data)) {
+        return false;
+    }
+
+    if (node.right && !validate(node.right, node.data, max)) {
+        return false;
+    }
+
+    return true;
+}
+
+==================== Back to JavaScript Events =================================
+
+class Events {
+  constructor() {
+    this.events = {};
+  }
+  // Register an event handler
+  on(eventName, callback) {
+    if (this.events[eventName]) {
+      this.events[eventName].push(callback);
+    } else {
+      this.events[eventName] = [callback];
+    }
+  }
+
+  // Trigger all callbacks associated
+  // with a given eventName
+  trigger(eventName) {
+    if (this.events[eventName]) {
+      for (let cb of this.events[eventName]) {
+        cb();
+      }
+    }
+  }
+
+  // Remove all event handlers associated
+  // with the given eventName
+  off(eventName) {
+    delete this.events[eventName];
+  }
+}
+
+==================== Sorting with BubbleSort =================================
+
+    Name                Worst Case Runtime                  Difficulty
+
+BubbleSort                      n^2                           easiest
+
+SelectionSort                   n^2                           easier
+
+MergeSort                       n*log(n)                      medium
+
+
+
