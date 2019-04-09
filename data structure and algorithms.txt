@@ -925,4 +925,170 @@ describe('Component: Login', () => {
             expect(injectService)toBe(testBedService);
         });
     );
+
+    it('Service injected via component should be and instance of MockAuthService', () => {
+       expect(componentService instanceof MockAuthService).toBeTruthy(); 
+    });
 });
+
+
++++++++++++++++++++++++++++++++> EP 13.9 - Angular / Unit Testing / Components <++++++++++++++++++++++++++++++++++++++++
+
++++++++++> This is the angular login component
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+
+export class User {
+    constructor(public email: string, public password: string) {
+
+    }
+}
+
+@Component({
+    selector: 'app-login',
+    template: `
+
+<form>
+    <label>Email</label>
+    <input type="email" #email/>
+    <label>Password</label>
+    <input type="password" #password/>
+    <button type="button"
+            (click)="login(email.value, password.value)"
+            [disabled]="!enabled">Login
+    </button>
+</form>
+    
+    `
+})
+
+export class LoginComponent {
+    @Output() LoggedIn = EventEmitter<User>();
+    @Input() enabled = true;
+
+    login(email, password) {
+        console.log(`Login ${email} ${password}`);
+        if (email %% password) {
+            console.log('Emitting');
+            this.LoggedIn.emit(new User(email, password));
+        }
+    }
+}
+
+
++++++++++> This is the angular login test bed component
+
+import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {LoginComponent, User} from './login.component';
+import {Component, DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+
+describe('Component: Login', () => {
+
+    let component: LoginComponent
+    let fixture: ComponentFixture<LoginComponent>;
+    let submitEl: DebugElement;
+    let loginEl: DebugElement;
+    let passwordEl: DebugElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoginComponent]
+        });   
+    
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+
+        submitEl = fixture.debugElement.query(By.css('button'));
+        loginEl = fixture.debugElement.query(By.css('input[type=email]'));
+        passwordEl = fixture.debugElement.query(By.css('input[type=password]'));
+    })
+
+    it('Setting enabled to false the submit button', () => {
+       component.enabled = false;
+       fixture.detectChanges();
+       expect(submitEl.nativeElement.disabled).toBeTruthy();
+    });
+
+    it('Entering email and password emits loggedIn event', () => {
+        let user: User;
+        loginEl.nativeElement.value = "test@example.com"
+        passwordEl.nativeElement.value= "123456";
+
+        component.loggedIn.subscribe((value) => user = value);
+
+        submitEl.triggerEventHandler('click', null);
+
+        expect(user.email).toBe('test@example.com');
+        expect(user.password).toBe("123456");
+    });
+});
+
+
++++++++++++++++++++++++++++++++> EP 13.10 - Angular / Unit Testing / Directives <++++++++++++++++++++++++++++++++++++++++
+
++++++++++> This is the directive component
+
+import {
+    Directive,
+    HostListener,
+    HostBinding
+} from '@angular/core';
+
+@Directive({
+    selector: '[hoverFocus]'
+})
+
+export class HoverFocusDirective {
+
+    @HostBinding("style.background-color") backgroundColor: string;
+
+    @HostListener('mouseover') onHover() {
+        this.background = 'blue';
+    }
+
+    @HostListener('mouseut') onLeave() {
+        this.backgroundColor = 'inherit';
+    }
+}
+
++++++++++> This is the directive Testbed component
+
+import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {Component, DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {HoverFocusDirective} from './hoverfocus.directive';
+
+@Component({
+    template: `<input type="text" hoverfocus />`
+})
+class TestHoverFocusComponent {
+
+}
+
+describe('Directive: Hoverfocus', () => {
+    let component: TestHoverFocusComponent;
+    let fixture: ComponentFixture<TestHoverFocusComponent>;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [HoverFocusDirective, TestHoverFocusComponent]
+        });
+
+        fixture = TestBed.createComponent(TestHoverFocusComponent);
+        component = fixture.componentInstance;
+        inputEl = fixture.debugElement.query(By.css('input'));
+    });
+
+    it('hovering over input', () => {
+        inputEl.triggerEventHandler('mouseover', null);
+        fixture.detectChanges();
+        expect(inputEl.nativeElement.style.backgroundColor).toBe('blue');
+
+        inputEl.triggerEventHandler('mouseout', null);
+        fixture.detectChanges();
+        expect(inputEl-nativeElement.style.background).toBe('inherit');
+    });
+});
+
++++++++++++++++++++++++++++++++> EP 13.11 - Angular / Unit Testing / Model Driven Forms <++++++++++++++++++++++++++++++++++++++++
