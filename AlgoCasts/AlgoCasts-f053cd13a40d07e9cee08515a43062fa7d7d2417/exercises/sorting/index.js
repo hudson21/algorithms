@@ -65,3 +65,4 @@ function merge(left, right) {
 }
 
 module.exports = { bubbleSort, selectionSort, mergeSort, merge };
+
