@@ -115,6 +115,8 @@ Quadratic Time n ^ 2 : Every element in a collection has to be compared to every
 
 Exponential Time 2 ^ n : If you add a "single" element to a collection, the processing power required doubles
 
+1. filter
+2. sort
 
 
 -------------------------------------------------
@@ -1442,9 +1444,13 @@ var addTwoNumbers = function(l1, l2) {
         l2 = l2.next;
     }
     
-    list1String = parseInt(list1String.split('').reverse().join(''));
-    list2String = parseInt(list2String.split('').reverse().join(''));
-    result = (list1String + list2String).toString().split('').reverse();
+    list1String = Number(list1String.split('').reverse().join('').toString());
+    list2String = Number(list2String.split('').reverse().join('').toString());
+    result = (Number(list1String + list2String)).toString().split('').reverse();
+    
+    console.log("list1String", Number("1e+30"));
+    console.log("list2String", list2String);
+    console.log("result", result);
     
     list = new ListNode(result[0]);
     let head = list;
@@ -1457,6 +1463,7 @@ var addTwoNumbers = function(l1, l2) {
 };
 
 
+<<<<<<< HEAD
 
 
 
@@ -1486,4 +1493,114 @@ function solution(A) {
     } else {
         return 0;
     }
+=======
+====================================================================================================================
+
+This is a demo task.
+
+Write a function:
+
+function solution(A);
+
+that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
+
+For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5.
+
+Given A = [1, 2, 3], the function should return 4.
+
+Given A = [−1, −3], the function should return 1.
+
+Write an efficient algorithm for the following assumptions:
+
+N is an integer within the range [1..100,000];
+each element of array A is an integer within the range [−1,000,000..1,000,000].
+
+------------------------------------------
+function solution(A) {
+
+    let minor = A[0];
+    let major = A[0];
+    let missingNumber;
+    
+    if(A.length > 1) {
+       for (let i=0; i < A.length;  i++) {
+        if(A[i] < minor) minor = A[i];
+        if(A[i] > major) major = A[i];
+       }
+       
+        if (major < 0) major = 1;
+        if (minor !== 1) minor = 1;
+    
+        while(!missingNumber) {
+          for (let i = minor; i <= major; i++) {
+            if (A.indexOf(i) === -1 ) {
+                return missingNumber = i;
+            }
+          }
+          major++;
+        }
+
+    } else if (A.length === 1) {
+        if (A[A.length - 1] > 1) {
+            return missinNumber = A[A.length - 1] - 1;
+        } else {
+            return missinNumber = A[A.length - 1] + 1;
+        } 
+    } else {
+        return  0;
+    }   
+    
+}
+
+function solution(A) {
+
+    A = A.filter(num => {
+       return num > 0; 
+    });
+    
+    
+    
+    if(A.length === 0) return 1;
+}
+
+
+---------------------------------------------
+function solution(A) {
+    
+    let major;
+    
+     A = A.filter(num => {
+            return num > 0; 
+         });
+    
+    if(A.length === 0) {
+        return 1;
+    }
+    
+    if(A.length > 1) {
+        major = A[0];
+        
+        for (let i = 1; i < A.length; i++) {
+            if (A[i] > major) major = A[i];
+        }
+        
+        
+        for(let i = 1; i <= major; i++) {
+            if(A.indexOf(i) === -1) {
+                console.log("i", i);
+            }
+        }
+        
+    }  
+    
+    if (A.length === 1) {
+        if (A[0] > 1) {
+            return  A[0] - 1;
+        } else {
+            return  A[0] + 1;
+        } 
+    } 
+    
+    
+>>>>>>> 6fcaa5f4e2b12d563451d788aef027c839c9a1a9
 }
