@@ -1463,13 +1463,6 @@ var addTwoNumbers = function(l1, l2) {
 };
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
 function solution(A) {
     // write your code in JavaScript (Node.js 8.9.4)
     let pares = [];
@@ -1493,7 +1486,6 @@ function solution(A) {
     } else {
         return 0;
     }
-=======
 ====================================================================================================================
 
 This is a demo task.
@@ -1602,5 +1594,4 @@ function solution(A) {
     } 
     
     
->>>>>>> 6fcaa5f4e2b12d563451d788aef027c839c9a1a9
 }
