@@ -1632,4 +1632,56 @@ The interviewers dont make the hiring decision. Their feedbacks are passed to a 
 ------> Behind the scenes (The Yahoo Interview)
 Yahoo
 
-Page 12 (The Yahoo Interview)
+------> Interview War Stories
+
+HIRING ME WILL MAKE YOUR LIVES EASIER
+
+----------------------------------------> BEFORE DE INTERVIEW <----------------------------------------------------------
+
+Project:
+    1. Most Challenging
+    2. What You learned
+    3. Most Interesting
+    4. Hardest Bug
+    5. Enjoyed Most 
+    6. Conflicts with Teammates
+
+------------> How to Prepare ofr Technical Questions 
+1. Try to solve the problem on your own. When you arel solving, make sure to think about the space and time efficiency.
+
+2. Write the code for the algorithm on paper.
+
+3. Type your paper code as is into computer.
+
+4. Do a mock interview. CareerCup offers a mock interview service, or you can grab a friend to ask you questions.
+
+
+Data Structures:
+    1. Linked Lists 
+    2. Binary Trees 
+    3. Tries
+    4. Stacks 
+    5. Queues 
+    6. Vectors / ArrayLists 
+    7. Hash Tables
+
+Algorithms  
+    1. Breadth First Search 
+    2. Depth First Search 
+    3. Binary Search 
+    4. Merge Sort 
+    5. Quick Sort 
+    6. Tree Insert / Find / etc
+
+Concepts 
+    1. Bit Manipulation 
+    2. Singleton Design Pattern 
+    3. Factory Design Patern 
+    4. Memory (Stacks vs Heap)
+    5. Recursion 
+    6. Big-O Time
+
+
+
+----------------------------------------> THE INTERVIEW AND BEYOND <----------------------------------------------------------
+Structure Answers Using S.A.R (Situacion, Action, Response) page 29
