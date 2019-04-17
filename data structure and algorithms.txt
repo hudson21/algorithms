@@ -1572,3 +1572,41 @@ function solution(A) {
     
     
 }
+
+===================================== Notes from the Book "Cracking the Code Interview" ==========================================
+
+_________________Words which I don´t know the meaning:_________________
+
+flawlessly: Impecablemente
+The wiser: El más sabio
+
+
+
+
+_________________________Notes________________________________
+
+------> Behind the scenes (The Microsoft Interview)
+1. Why do you want to work for Microsoft ?
+R./ You need to show a passion for the tecnology and tools related with the Tech Brand.
+
+------> Behind the scenes (The Amazon Interview)
+1. Amazon tends to ask lot of questions about object oriented design. The bar raiser, who is
+   brought in from a different team to keep the bar high.
+
+------> Behind the scenes (The Google Interview)
+1. Feedback is typically broken down into four categories (Analytical Ability, Coding, Experience and Communication)
+   and you are given a score from 1.0 to 4.0 overall.
+
+Prepare for concepts like:
+    System Design 
+    Memory Limits
+    Bit Manipulation
+The interviewers dont make the hiring decision. Their feedbacks are passed to a hiring committee
+
+------> Behind the scenes (The Apple Interview)
+1. There is 2-on-1 interviews often.
+
+------> Behind the scenes (The Yahoo Interview)
+Yahoo
+
+Page 12 (The Yahoo Interview)
