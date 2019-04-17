@@ -45,6 +45,7 @@ class Tree {
         }
     }
 
+    //Depth First Traversal
     traverseDF(fn) {
         const arr = [this.root];
 

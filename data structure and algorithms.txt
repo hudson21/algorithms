@@ -1463,6 +1463,29 @@ var addTwoNumbers = function(l1, l2) {
 };
 
 
+function solution(A) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    let pares = [];
+    let impares = [];
+    
+    if(A.length > 0) {
+        
+        for (let i=0; i < A.length; i++) {
+            if(i % 2 === 0 && !pares[i]) pares[i] = A[i];
+            if(i % 2 !== 0 && !impares[i])impares[i]= A[i];
+        }
+        
+        for (let i=0; i < A.length; i++) {
+            if(A[i] !== A[i+2] && A[i] && A[i+2]) {
+                pares.splice(i, 1);
+            }
+        }
+        
+        console.log("pares", pares);
+        
+    } else {
+        return 0;
+    }
 ====================================================================================================================
 
 This is a demo task.
