@@ -1604,6 +1604,11 @@ flawlessly: Impecablemente
 The wiser: El más sabio
 Ambiguity: Ambiguedad
 
+Exercises:                               YOU NEED TO DO THESE EXERCISES
+Page 48 --> Array and Strings 
+Page 50 --> Linked Lists 
+Page 52 --> Stacks and Queues
+Page 54 --> Trees and Graphs
 
 
 _________________________Notes________________________________
@@ -1831,11 +1836,18 @@ Break code into sub-routines, and design data structures to link appropriate dat
 You are doing great.
 
 
-============================= AT THE INTERVIEW. FREQUENTLY ASKED QUESTIONS  ===============================}
-Page 48
+============================= AT THE INTERVIEW. FREQUENTLY ASKED QUESTIONS  ===============================
 
-------------> Data Structures 
-Hash Tables:
+See the beginning of notes to see the pages where it can be found the exercises.
+
+
+=============================================== Concepts and Algorithms ======================================
+
+-------> Bit Manipulation
+
+Page 57
+
+
 
 
 
