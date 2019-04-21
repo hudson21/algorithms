@@ -1603,13 +1603,27 @@ _________________Words which I don´t know the meaning:_________________
 flawlessly: Impecablemente
 The wiser: El más sabio
 Ambiguity: Ambiguedad
+Tenants: Inquilinos
 
 Exercises:                               YOU NEED TO DO THESE EXERCISES
 Page 48 --> Array and Strings 
 Page 50 --> Linked Lists 
 Page 52 --> Stacks and Queues
 Page 54 --> Trees and Graphs
-
+Page 58 --> Bit Manipulation
+Page 60 --> Brain Teasers
+Page 62 --> Object Oriented Design
+Page 64 --> Recursion
+Page 66 --> Sorting and Searching 
+Page 68 --> Mathematical 
+Page 70 --> Testing
+Page 72 --> System Design and Memory Limits
+Page 76 --> C++
+Page 78 --> Java 
+Page 80 --> Databases
+Page 82 --> Low Level
+Page 89 --> Moderate 
+Page 91 --> Hard
 
 _________________________Notes________________________________
 
@@ -1847,7 +1861,74 @@ See the beginning of notes to see the pages where it can be found the exercises.
 
 Page 57
 
+Study about bit manipulation and operation with binary numbers.
 
+And: 
+    0 & 0 = 0
+    0 & 1 = 0
+    1 & 0 = 1
+    1 & 1 = 1
+
+Or:
+    0 | 0 = 0
+    0 | 1 = 1
+    1 | 0 = 1
+    1 | 1 = 1
+
+Xor: 
+    0 ^ 0 = 0
+    0 ^ 1 = 1
+    1 ^ 0 = 1
+    1 ^ 1 = 0
+
+Left Shift: x << y means shifted y bits to the left. If you start shifting and you run out of space, the bits 
+just "drop off"
+    00011001 << 2 = 01100100
+    00011001 << 4 = 10010000
+Right Shift: x >> y means x shifted y bits to the right. If you start shifting and you run out of space, the bits 
+just "drop off"
+    00011001 >> 2 = 00000110
+    00011001 >> 4 = 00000001
+
+=============================================== Brain Teasers ====================================== 
+
+The rope Brain Teaser Problem: Page 59
+
+=============================================== Object Oriented Design ====================================== 
+
+
+=============================================== Recursion ====================================== 
+All problems that can be solved recursively can also be solved iteratively (though the code may be much more complicated)
+
+Recursive algorithms can be very space inefficient. Each recursive call adds a new layer to the stack, which means 
+that if your algorithm has O(n) recursive calls then it uses O(n) memory. This is one reason why an iterative 
+algorithm may be better.
+
+=============================================== Sorting and Searching ======================================
+
+Bubble Sort
+Selection Sort 
+Merge Sort 
+Quick Sort 
+Bucket Sort
+
+=============================================== Mathematical ======================================
+
+
+=============================================== System Design and Memory Limits ======================================
+You should have an understanding of how you would solve the simple, small case in order to understand how you would 
+solve the bigger case.
+
+
+=============================================== Databases ==========================================
+
+
+=============================================== Low Level ==========================================
+
+Big vs Little Endian: 
+Stack (Memory):
+Heap (Memory):
+Malloc: 
 
 
 
