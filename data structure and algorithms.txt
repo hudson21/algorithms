@@ -1685,3 +1685,113 @@ Concepts
 
 ----------------------------------------> THE INTERVIEW AND BEYOND <----------------------------------------------------------
 Structure Answers Using S.A.R (Situacion, Action, Response) page 29
+
+1.
+function findNumber(arr, k) {
+    let result = arr.indexOf(k);
+
+    if (result === -1) return 'NO';
+    else return 'YES';
+}
+
+2.
+// Complete the oddNumbers function below.
+function oddNumbers(l, r) {
+    let oddNumber = [];
+    for (let i = l; i <= r; i++) { 
+        if (i % 2 !== 0) { 
+            oddNumber.push(i);
+        }
+    }
+    return oddNumber;
+
+}
+
+function minimumMoves(a, m) {
+    // Write your code here
+    //Global Variables
+    let result = 0;
+
+    let andreaLength = a.length;
+    let mariaLength = m.length;
+    let mariaNumber;
+    let andreaNumber;
+    let splitAndreaNumber;
+    let splitMariaNumber;
+
+    //Extract the numbers
+    for (let i = 0; i < andreaLength; i++) {
+        andreaNumber = a[i];
+        mariaNumber = m[i];
+
+        splitAndreaNumber = andreaNumber.toString().split('');
+        splitMariaNumber = mariaNumber.toString().split('');
+
+        for (let i = 0; i < splitAndreaNumber.length; i++) {
+            result += Math.abs(parseInt(splitMariaNumber[i]) - parseInt(splitAndreaNumber[i]));
+        }
+    }
+
+    return result;
+}
+
+
+
+
+function closestColor(pixels) {
+    let number;
+    let closestColor = '';
+    let closestColors = [];
+
+    let colors = {
+        Black: 0,
+        White: 0,
+        Red: 0,
+        Green: 0,
+        Blue: 0
+    }
+
+    let firstGroup;
+    let secondGroup;
+    let thirdGroup;
+
+    for (let i = 0; i < pixels.length; i++) {
+        colors.Black = 0
+        colors.White = 0;
+        colors.Red = 0;
+        colors.Green = 0;
+        colors.Blue = 0;
+
+        firstGroup = parseInt(pixels[i].split('').splice(0, 8).join(''), 2);
+        secondGroup = parseInt(pixels[i].split('').splice(8, 8).join(''), 2);
+        thirdGroup = parseInt(pixels[i].split('').splice(16).join(''), 2);
+
+        colors.Black = Math.sqrt(Math.pow((firstGroup - 0), 2) + Math.pow((secondGroup - 0), 2) + Math.pow((thirdGroup - 0), 2));
+        colors.White = Math.sqrt(Math.pow((firstGroup - 255), 2) + Math.pow((secondGroup - 255), 2) + Math.pow((thirdGroup - 255), 2));
+        colors.Red = Math.sqrt(Math.pow((firstGroup - 255), 2) + Math.pow((secondGroup - 0), 2) + Math.pow((thirdGroup - 0), 2));
+        colors.Green = Math.sqrt(Math.pow((firstGroup - 0), 2) + Math.pow((secondGroup - 255), 2) + Math.pow((thirdGroup - 0), 2));
+        colors.Blue = Math.sqrt(Math.pow((firstGroup - 0), 2) + Math.pow((secondGroup - 0), 2) + Math.pow((thirdGroup - 255), 2));
+
+        number = colors.Black;
+        closestColor = 'Black';
+
+
+        for (let color in colors) {
+            if (color !== 'Black') {
+                if (colors[color] === number) {
+                    number = colors[color];
+                    closestColor = 'Ambiguous';
+                }
+                if (colors[color] < number) {
+                    number = colors[color];
+                    closestColor = color;
+                }
+            }
+        }
+
+        closestColors.push(closestColor)
+    }
+
+    return closestColors;
+}
+
