@@ -2036,8 +2036,188 @@ solve the bigger case.
 Big vs Little Endian: 
 Stack (Memory):
 Heap (Memory):
-Malloc: 
+Malloc:
 
+// Complete the calculateArea function below.
+// It returns a Promise which on success, returns area of the shape, and on failure returns [-1].
+let calculateArea = (shape, values) => {
+    const results = [];
+
+    shape.map((it, index) => {
+        switch(it) {
+            case 'square':
+                square(values[index]);
+                break;
+            case 'rectangle':
+                rectangle(values[index]);
+                break;
+            case 'triangle':
+                triangle(values[index]);
+                break;
+            case 'circle':
+                circle(values[index]);
+                break;
+            default:
+                results.push(-1);
+        }
+    })
+    //string, object
+
+    function square(numbers) {
+        if (numbers.length !== 1) {
+            results.push(-1);
+        } else {
+            let result = Math.round((Math.pow(numbers, 2)) * 100) / 100;
+            results.push(result);
+        } 
+    };
+
+    function rectangle(numbers) {
+        if (numbers.length !== 2) {
+            results.push(-1);
+        } else {
+            let result = Math.round((numbers[0] * numbers[1]) * 100) / 100
+            results.push(result);
+        }
+    };
+
+    function circle(numbers) {
+        if (numbers.length !== 1) {
+            results.push(-1);
+        } else {
+            let result = Math.round(((3.14 * (Math.pow(numbers, 2))) * 100)) / 100;
+            results.push(result);
+        }
+    }
+
+    function triangle(numbers) {
+        if (numbers.length !== 2) {
+            results.push(-1);
+        } else {
+            let result = Math.round((0.5 * numbers[0] * numbers[1]) * 100) / 100
+            results.push(result);
+        }
+    }
+    
+    return new Promise((resolve, reject) => {
+        if (results.indexOf(-1) === -1) {
+            resolve(results);
+        } else {
+            reject([-1]);
+        }
+    })
+}
+
+// Complete the generateArea function below.
+// It returns a Promise which on success, returns an array of areas of all the shapes and on failure, returns [-1].
+let getAreas = (shapes, values_arr) => {
+    return calculateArea(shapes, values_arr)
+    .then(values => values)
+    .catch(err => err);
+}
+
+
+//////////////////////////////////
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', inputStdin => {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', _ => {
+    inputString = inputString.trim().split('\n').map(str => str.trim());
+    
+    main();
+});
+
+let readLine = () => inputString[currentLine++];
+
+
+// Complete the calculateArea function below.
+// It returns a Promise which on success, returns area of the shape, and on failure returns [-1].
+let calculateArea = (shape, values) => {
+    const results = [];
+
+    shape.map((it, index) => {
+        switch(it) {
+            case 'square':
+                square(values[index]);
+                break;
+            case 'rectangle':
+                rectangle(values[index]);
+                break;
+            case 'triangle':
+                triangle(values[index]);
+                break;
+            case 'circle':
+                circle(values[index]);
+                break;
+            default:
+                results.push(-1);
+        }
+    })
+    //string, object
+
+    function square(numbers) {
+        if (numbers.length !== 1) {
+            results.push(-1);
+        } else {
+            let result = Math.round((Math.pow(numbers, 2)) * 100) / 100;
+            results.push(result);
+        } 
+    };
+
+    function rectangle(numbers) {
+        if (numbers.length !== 2) {
+            results.push(-1);
+        } else {
+            let result = Math.round((numbers[0] * numbers[1]) * 100) / 100
+            results.push(result);
+        }
+    };
+
+    function circle(numbers) {
+        if (numbers.length !== 1) {
+            results.push(-1);
+        } else {
+            let result = Math.round(((3.14 * (Math.pow(numbers, 2))) * 100)) / 100;
+            results.push(result);
+        }
+    }
+
+    function triangle(numbers) {
+        if (numbers.length !== 2) {
+            results.push(-1);
+        } else {
+            let result = Math.round((0.5 * numbers[0] * numbers[1]) * 100) / 100
+            results.push(result);
+        }
+    }
+    
+    return new Promise((resolve, reject) => {
+        if (results.indexOf(-1) === -1) {
+            resolve(results);
+        } else {
+            reject([-1]);
+        }
+    })
+}
+
+// Complete the generateArea function below.
+// It returns a Promise which on success, returns an array of areas of all the shapes and on failure, returns [-1].
+let getAreas = (shapes, values_arr) => {
+    return calculateArea(shapes, values_arr)
+    .then(values => values)
+    .catch(err => err);
+}
 
 
 
